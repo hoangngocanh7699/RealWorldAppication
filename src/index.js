@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
-import Todos from './component/todos/todos';
+import App from './App';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <Todos />
+    <App />
 );
 
 // If you want to start measuring performance in your app, pass a function
