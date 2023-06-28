@@ -1,15 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
 
-import { useCallback, useEffect, useRef } from "react"
+import { useEffect, useCallback, useRef } from "react"
 
 const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 
     const refInput = useRef(null)
 
-    const updateTodo = (title, complete) => {
+    const updateTodo = (title, complete, id) => {
         const newTodo = todos.map((todo) => {
-            return todo.title === title ? { title, complete } : todo
+            return todo.id === id ? { title, complete, id } : todo
         })
         setTodos(newTodo)
         setEditTodo('')
@@ -31,10 +31,10 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
     const handleSubmit = useCallback((event) => {
         event.preventDefault()
         if (!editTodo) {
-            setTodos([...todos, { title: input, complete: false}])
+            setTodos([...todos, { title: input, complete: false, id: Math.floor(Math.random() * 1000)}])
             setInput('')
         }else {
-            updateTodo(input, editTodo.title, editTodo.complete)
+            updateTodo(input, editTodo.id, editTodo.complete)
         }
     }, [input])
 

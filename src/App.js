@@ -11,6 +11,8 @@ const App = () => {
     const [todos, setTodos] = useState([])
     const [editTodo, setEditTodo] = useState(null)
 
+    console.log(todos)
+
     return (
         <div className="container">
             <div className="app-wrapper">
