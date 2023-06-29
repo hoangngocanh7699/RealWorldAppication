@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
 
@@ -7,9 +8,10 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 
     const refInput = useRef(null)
 
-    const updateTodo = (title, complete, id) => {
+    const updateTodo = (input, id, complete) => {
+        console.log('update todo=============')
         const newTodo = todos.map((todo) => {
-            return todo.id === id ? { title, complete, id } : todo
+            return todo.id === id ? {title: input, id, complete} : todo
         })
         setTodos(newTodo)
         setEditTodo('')
@@ -36,12 +38,14 @@ const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
         }else {
             updateTodo(input, editTodo.id, editTodo.complete)
         }
-    }, [input])
+    },[input])
 
     return (
         <form onSubmit={handleSubmit}>
             <input type="text" ref={refInput} placeholder="Enter a Todo..." className="task-input" value={input} required onChange={handleInput}/>
-            <button className="button-add" type="submit">Add</button>
+            <button className="button-add" type="submit">
+                {editTodo ? 'Edit' : 'Add'}
+            </button>
         </form>
     )
 
