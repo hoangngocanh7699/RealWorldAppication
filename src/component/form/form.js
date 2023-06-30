@@ -2,20 +2,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
 
-import { useEffect, useCallback, useRef } from "react"
+import { useEffect, useCallback, useRef, useMemo } from "react"
 
 const Form = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
 
     const refInput = useRef(null)
 
-    const updateTodo = (input, id, complete) => {
-        console.log('update todo=============')
-        const newTodo = todos.map((todo) => {
-            return todo.id === id ? {title: input, id, complete} : todo
-        })
-        setTodos(newTodo)
-        setEditTodo('')
-    }
+    const updateTodo = useMemo(() => {
+        return (input, id, complete) => {
+            const newTodo = todos.map((todo) => {
+                return todo.id === id ? {title: input, id, complete} : todo
+            })
+            setTodos(newTodo)
+            setEditTodo('')
+        }
+    }, [todos, setEditTodo])
 
     useEffect(() => {
         refInput.current.focus()
